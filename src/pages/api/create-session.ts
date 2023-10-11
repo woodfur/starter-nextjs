@@ -5,8 +5,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     try {
       const response = await sdk.session.create({
-        success_url: "http://localhost:3000/success",
-        cancel_url: "http://localhost:3000/cancel",
+        success_url: "http://localhost:3001/success",
+        cancel_url: "http://localhost:3001/cancel",
         // additional tokens you can pass, SOL and USDC are default
         tokens: ["bonk", "samo"],
         items: [

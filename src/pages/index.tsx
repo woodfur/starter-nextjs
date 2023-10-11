@@ -13,10 +13,20 @@ const Index: NextPage = () => {
     const response = await fetch("/api/create-session", {
       method: "POST",
     });
-    const data = await response.json();
 
-    router.push(data.payment_url);
-    setIsLoading(false);
+    if (response.ok) {
+      const contentType = response.headers.get("Content-Type");
+
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+        router.push(data.payment_url);
+        setIsLoading(false);
+      } else {
+        console.error("Response is note json");
+      }
+    } else {
+      console.error("Request failed" + response.status);
+    }
   };
 
   return (
